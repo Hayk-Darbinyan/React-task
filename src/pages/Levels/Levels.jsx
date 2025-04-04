@@ -10,17 +10,17 @@ const Levels = () => {
       <div className="levels">
         <h2>Choose Difficulty</h2>
         <div className="levelCards">
-          <div className="level-Card" onClick={() => navigate("/game/1")}>
+          <div className="levelCard" onClick={() => navigate("/game/1")}>
             <div className="levelIcon">🐶</div>
             <h3>Easy</h3>
             <p>4x4 Grid</p>
           </div>
-          <div className="level-card" onClick={() => navigate("/game/2")}>
+          <div className="levelCard" onClick={() => navigate("/game/2")}>
             <div className="levelIcon">🦊</div>
             <h3>Medium</h3>
             <p>6x6 Grid</p>
           </div>
-          <div className="level-card" onClick={() => navigate("/game/3")}>
+          <div className="levelCard" onClick={() => navigate("/game/3")}>
             <div className="levelIcon">🦉</div>
             <h3>Hard</h3>
             <p>8x8 Grid</p>
