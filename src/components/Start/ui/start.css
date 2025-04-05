@@ -1,0 +1,150 @@
+.startContainer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.playersContainer {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.gameTitle {
+    color: #6b5b95;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.playersContainer input {
+    width: 80%;
+    padding: 1rem;
+    margin: 0.5rem auto;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: block;
+}
+
+.playersContainer input:focus {
+    outline: none;
+    border-color: #6b5b95;
+    box-shadow: 0 0 0 3px rgba(107, 91, 149, 0.2);
+}
+
+.playersContainer input::placeholder {
+    color: #bbb;
+    font-style: italic;
+}
+
+.playersContainer input:focus {
+    animation: inputPulse 0.5s ease;
+}
+
+.playersContainer h2 {
+    color: #6b5b95;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.levelsContainer {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.levels {
+    text-align: center;
+}
+
+.levels h2 {
+    color: #6b5b95;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.levelCards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.levelCard {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    width: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+}
+
+.levelCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: #6b5b95;
+}
+
+.levelIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.levelCard:hover .levelIcon {
+    transform: scale(1.2);
+}
+
+.levelCard h3 {
+    color: #4a4a4a;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.levelCard p {
+    color: #888;
+    font-size: 1rem;
+}
+
+@media (min-width: 600px) {
+    .playersContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .playersContainer h2 {
+        width: 100%;
+    }
+
+    .playersContainer input {
+        width: 45%;
+        margin: 0.5rem 0;
+    }
+}
+
+@keyframes inputPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

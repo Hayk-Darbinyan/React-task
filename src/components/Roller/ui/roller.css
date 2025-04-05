@@ -1,0 +1,101 @@
+.starterModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.starterModal {
+    position: relative;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem 3rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.backButton {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    color: #6b5b95;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.backButton:hover {
+    color: #5a4a84;
+    transform: translateX(-2px);
+}
+
+.starterModal h2 {
+    color: #6b5b95;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.playerResult {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.readyText {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.winnerAnnouncement {
+    font-size: 1.4rem;
+    color: #4a4a4a;
+}
+
+.winnerName {
+    color: #6b5b95;
+    font-weight: bold;
+}
+
+.decideButton {
+    background: #6b5b95;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.decideButton:hover {
+    background: #5a4a84;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 91, 149, 0.4);
+}
