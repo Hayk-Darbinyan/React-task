@@ -1,16 +1,25 @@
-import { useState } from "react";
-import useStore from "../../../store/store";
+import { useEffect, useState } from "react";
+import { useStore } from "../../../store/store";
 import Roller from "../../Roller";
 import "./start.css";
 
 const Start = () => {
-  const { setPlayer1Name, setPlayer2Name, setLevel } = useStore(
-    (state) => state
-  );
+  const {
+    player1Name: storedPlayer1,
+    player2Name: storedPlayer2,
+    setPlayer1Name,
+    setPlayer2Name,
+    setLevel,
+  } = useStore();
 
-  const [player1, setPlayer1] = useState("Player 1");
-  const [player2, setPlayer2] = useState("Player 2");
+  const [player1, setPlayer1] = useState(storedPlayer1);
+  const [player2, setPlayer2] = useState(storedPlayer2);
   const [showRoller, setShowRoller] = useState(false);
+
+  useEffect(() => {
+    setPlayer1(storedPlayer1);
+    setPlayer2(storedPlayer2);
+  }, [storedPlayer1, storedPlayer2]);
 
   const handleChange = (e) => {
     setPlayer1(e.target.value);

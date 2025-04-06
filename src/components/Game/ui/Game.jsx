@@ -1,57 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import useStore from "../../../store/store";
+import { useStore } from "../../../store/store";
 import { useImage } from "../../../hooks/useImage";
 import "./game.css";
 
 const Game = () => {
   const navigate = useNavigate();
 
-  const { level, player1Name, player2Name, decidedPlayer } = useStore(
-    (state) => state
-  );
+  const {
+    level,
+    player1Name,
+    player2Name,
+    decidedPlayer,
+    gameState,
+    saveGameState,
+    resetGameState,
+  } = useStore();
   const { data } = useImage();
-  console.log(data);
-
-  // const cardData = [
-  //   { id: 1, emoji: "🐶", name: "Dog" },
-  //   { id: 2, emoji: "🐱", name: "Cat" },
-  //   { id: 3, emoji: "🐭", name: "Mouse" },
-  //   { id: 4, emoji: "🐹", name: "Hamster" },
-  //   { id: 5, emoji: "🐰", name: "Rabbit" },
-  //   { id: 6, emoji: "🦊", name: "Fox" },
-  //   { id: 7, emoji: "🐻", name: "Bear" },
-  //   { id: 8, emoji: "🐼", name: "Panda" },
-  //   { id: 9, emoji: "🦁", name: "Lion" },
-  //   { id: 10, emoji: "🐮", name: "Cow" },
-  //   { id: 11, emoji: "🐷", name: "Pig" },
-  //   { id: 12, emoji: "🐸", name: "Frog" },
-  //   { id: 13, emoji: "🐵", name: "Monkey" },
-  //   { id: 14, emoji: "🐔", name: "Chicken" },
-  //   { id: 15, emoji: "🐧", name: "Penguin" },
-  //   { id: 16, emoji: "🦄", name: "Unicorn" },
-  //   { id: 17, emoji: "🍎", name: "Apple" },
-  //   { id: 18, emoji: "🍐", name: "Pear" },
-  //   { id: 19, emoji: "🍊", name: "Orange" },
-  //   { id: 20, emoji: "🍋", name: "Lemon" },
-  //   { id: 21, emoji: "🍌", name: "Banana" },
-  //   { id: 22, emoji: "🍉", name: "Watermelon" },
-  //   { id: 23, emoji: "🍇", name: "Grapes" },
-  //   { id: 24, emoji: "🍓", name: "Strawberry" },
-  //   { id: 25, emoji: "🥕", name: "Carrot" },
-  //   { id: 26, emoji: "🍕", name: "Pizza" },
-  //   { id: 27, emoji: "🍔", name: "Burger" },
-  //   { id: 28, emoji: "🌭", name: "Hotdog" },
-  //   { id: 29, emoji: "⚽", name: "Soccer" },
-  //   { id: 30, emoji: "🏀", name: "Basketball" },
-  //   { id: 31, emoji: "🎾", name: "Tennis" },
-  //   { id: 32, emoji: "🏓", name: "Ping Pong" },
-  // ];
 
   const cardData = (data ?? []).map((obj, idx) => ({
     id: idx + 1,
     emoji: obj.download_url,
   }));
+
+  console.log(decidedPlayer, player1Name, player2Name);
 
   const [cards, setCards] = useState([]);
   const [flipped, setFlipped] = useState([]);
@@ -68,11 +40,62 @@ const Game = () => {
   const [player2Pairs, setPlayer2Pairs] = useState(0);
   const [player1Time, setPlayer1Time] = useState(0);
   const [player2Time, setPlayer2Time] = useState(0);
-
   const selectedCards = cardData.slice(
     0,
     level === 1 ? 8 : level === 2 ? 18 : 32
   );
+
+  useEffect(() => {
+    if (gameState) {
+      setCards(gameState.cards);
+      setFlipped(gameState.flipped);
+      setMatched(gameState.matched);
+      setGameStarted(gameState.gameStarted);
+      setPreviewMode(gameState.previewMode);
+      setCurrentPlayer(gameState.currentPlayer);
+      setPlayer1Moves(gameState.player1Moves);
+      setPlayer2Moves(gameState.player2Moves);
+      setPlayer1Pairs(gameState.player1Pairs);
+      setPlayer2Pairs(gameState.player2Pairs);
+      setPlayer1Time(gameState.player1Time);
+      setPlayer2Time(gameState.player2Time);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (gameStarted) {
+      saveGameState({
+        cards,
+        flipped,
+        matched,
+        gameStarted,
+        previewMode,
+        currentPlayer,
+        player1Moves,
+        player2Moves,
+        player1Pairs,
+        player2Pairs,
+        player1Time,
+        player2Time,
+        level,
+      });
+    }
+  }, [
+    cards,
+    flipped,
+    matched,
+    gameStarted,
+    previewMode,
+    currentPlayer,
+    player1Moves,
+    player2Moves,
+    player1Pairs,
+    player2Pairs,
+    player1Time,
+    player2Time,
+    level,
+    saveGameState,
+  ]);
 
   useEffect(() => {
     let interval;
@@ -116,6 +139,7 @@ const Game = () => {
   };
 
   const restartGame = () => {
+    resetGameState();
     setCards([]);
     setFlipped([]);
     setMatched([]);
@@ -191,6 +215,7 @@ const Game = () => {
 
   const backToLevels = () => {
     if (window.confirm("Are you sure you want to leave the game?")) {
+      resetGameState();
       navigate("/");
     } else return;
   };
